@@ -54,6 +54,12 @@ $accent-color: #e4b9d6;
 
 .course-date {
   font-weight: bold;
+  color: $accent-color;
+}
+
+.price {
+  font-weight: bold;
+  color: $accent-color;
 }
 
 @media (prefers-reduced-motion: no-preference) {

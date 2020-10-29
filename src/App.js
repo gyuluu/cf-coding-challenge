@@ -8,6 +8,8 @@ function App() {
   const [selectedCourse, setSelectedCourse] = useState({});
   const [startDate, setStartDate] = useState('');
   const [nextDates, setNextDates] = useState([]);
+  const [correctPrice, setCorrectPrice] = useState([]);
+  const secret = require('./secrets.json');
 
   useEffect(() => {
     fetch("https://private-e05942-courses22.apiary-mock.com/courses")
@@ -34,6 +36,21 @@ function App() {
         setSelectedCourse(json);
         setStartDate(json.start_dates[0]);
         setNextDates(json.start_dates.slice(1));
+        const prices = json.prices;
+
+        fetch(`http://api.ipstack.com/check?access_key=${secret.key}`)
+          .then(response => response.json())
+          .then(json => {
+            console.log('this is the current user: ', json);
+            if (json.continent_code === 'EU') {
+              const price_eu = prices.filter(price => price.currency === 'eur');
+              setCorrectPrice(price_eu);
+            } else {
+              const price_usd = prices.filter(price => price.currency === 'usd');
+              setCorrectPrice(price_usd);
+            }
+          })
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
     setShowCourse(true);
@@ -72,6 +89,14 @@ function App() {
                 <p key={index}>{date}</p>
               )
             }
+            <p>
+              <span className='price'>Price: </span>
+              {
+                correctPrice.map((price, index) => 
+                  <span key={index}>{price.amount} {price.currency}</span>
+                )
+              }
+            </p>
           </div>
         ) : (
           null
