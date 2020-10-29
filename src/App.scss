@@ -1,5 +1,13 @@
+$main-color: #223d50;
+$text-color: #ffffff;
+
+* {
+  background-color: $main-color;
+}
+
 .App {
   text-align: center;
+  color: $text-color;
 }
 
 .App-logo {
