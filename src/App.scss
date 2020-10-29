@@ -38,7 +38,7 @@ $accent-color: #e4b9d6;
       
     }
 
-    .menu a {
+    .menu span {
       color: #000000;
       background-color: $secondary-color;
       padding: 12px 16px;
@@ -46,6 +46,14 @@ $accent-color: #e4b9d6;
       display: block;
     }
   }
+}
+
+.course-description {
+  font-size: 24px;
+}
+
+.course-date {
+  font-weight: bold;
 }
 
 @media (prefers-reduced-motion: no-preference) {
