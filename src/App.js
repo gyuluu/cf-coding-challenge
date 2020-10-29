@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.scss';
 
 function App() {
@@ -13,11 +13,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>CareerFoundry</h1>
-      <p>
-        Choose one course we have to offer
-      </p>
+    <div className='app'>
+      <div className='navigation'>
+        <h1 className="cf-logo">CareerFoundry</h1>
+        <div className='dropdown'>
+          <button className="dropbtn">Courses ↓</button>
+          <div className='menu'>
+              <a href='#'> Course 1 </a>
+              <a href='#'> Course 2 </a>
+              <a href='#'> Course 3 </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
