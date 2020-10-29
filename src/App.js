@@ -6,6 +6,7 @@ function App() {
   const [courses, setCourses] = useState([]);
   const [showCourse, setShowCourse] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState({});
+  const [selectedCourseTitle, setSelectedCourseTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [nextDates, setNextDates] = useState([]);
   const [correctPrice, setCorrectPrice] = useState([]);
@@ -28,6 +29,7 @@ function App() {
 
   const selectCourse = (e) => {
     console.log("this is your course: ", e.target.textContent);
+    setSelectedCourseTitle(e.target.textContent);
     const filteredCourse = courses.filter(course => course.title === e.target.textContent);
     fetch(`https://private-e05942-courses22.apiary-mock.com/courses/${filteredCourse[0].slug}`)
       .then(response => response.json())
@@ -81,6 +83,7 @@ function App() {
       {
         showCourse ? (
           <div>
+            <h2>{selectedCourseTitle}</h2>
             <p className='course-description'>{selectedCourse.description}</p>
             <p><span className='course-date'>Next Start Date: </span>{startDate}</p>
             <p><span className='course-date'>Next Dates: </span></p>
