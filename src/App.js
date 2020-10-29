@@ -3,12 +3,14 @@ import './App.scss';
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     fetch("https://private-e05942-courses22.apiary-mock.com/courses")
       .then(response => response.json())
       .then(json => {
         console.log('these are your courses: ', json);
+        setCourses(json);
       })
       .catch(err => console.log('this is your error: ', err));
   }, []);
@@ -27,9 +29,11 @@ function App() {
           {
             showMenu ? (
               <div className='menu'>
-                <a href='#'> Course 1 </a>
-                <a href='#'> Course 2 </a>
-                <a href='#'> Course 3 </a>
+                {
+                  courses.map((course, index) => 
+                    <a href='#' key={index}> {course.title} </a>
+                  )
+                }
               </div>
             ) : (
               null
